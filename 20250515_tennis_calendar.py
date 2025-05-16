@@ -152,7 +152,7 @@ def trans_schedule_list_to_google_calendar(
                 "All Day Event": False,
                 "Description": "TODO",
                 "Location": place,
-                "Private": True
+                "Private": False,
             }
 
             event_dict_list.append(event_dict)
