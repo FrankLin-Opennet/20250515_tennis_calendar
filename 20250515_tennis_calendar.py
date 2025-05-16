@@ -8,7 +8,7 @@ URL_LINK = "https://api.sportdraw.com.tw/api/AdminDraw/Schedule"
 
 PLACE_DICT = [
     {"name": "古亭河濱公園", "Id1st": 28},
-    # TODO: add Jennings 彩虹
+    {"name": "彩虹河濱公園", "Id1st": 19},
     # more here
 ]
 
@@ -41,7 +41,12 @@ MEMBER_LIST = [
         "name1st": "古亭河濱公園",
         "onName": "Frank Lin",
     },
-    # TODO: add Jennings
+    {
+        "memberName": "詹**", 
+        "eventName": "網球運動",
+        "name1st": "彩虹河濱公園",
+        "onName": "Jennings Chan",
+    },
     # more here
 ]
 
@@ -114,12 +119,17 @@ def trans_schedule_list_to_google_calendar(
     
     event_dict_list = []
     for i in schedule_list:
+
         place = i.get("name1st")
         event_name = i.get("eventName")
         member_name = i.get("memberName")
         time_list = i.get("list")
         print(f"Event: {event_name} at {place} by {member_name}")
         for t in time_list:
+
+            # filter winner event
+            if t.get("isWinner") == False:
+                continue
             event_date = t.get("date")
             event_hour = t.get("hours")
             event_court = t.get("name3rd")
